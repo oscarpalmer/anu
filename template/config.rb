@@ -8,9 +8,10 @@ configure :build do
   activate :minify_javascript
 end
 
-page '/*.json', layout: false
-page '/*.txt',  layout: false
-page '/*.xml',  layout: false
+page '/*.json',   layout: false
+page '/*.txt',    layout: false
+page '/*.xml',    layout: false
+page '/404.html', layout: false
 
 set :css_dir,    'assets/css'
 set :fonts_dir,  'assets/fonts'
