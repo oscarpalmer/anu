@@ -1,12 +1,12 @@
 xml.instruct!
 xml.urlset xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' do
   pages = sitemap.resources.select do |page|
-    page.path =~ /\.html/
+    page.path =~ /\A((?!404).)*\.html\z/
   end
 
   pages.each do |page|
     xml.url do
-      xml.loc page.url
+      xml.loc "https://example.com#{page.url}"
     end
   end
 end

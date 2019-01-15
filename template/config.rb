@@ -2,6 +2,7 @@ activate :livereload
 
 configure :build do
   activate :asset_hash
+  activate :directory_indexes
   activate :gzip
   activate :minify_css
   activate :minify_html
@@ -13,7 +14,7 @@ ignore '/**/.keep'
 page '/*.json',   layout: false
 page '/*.txt',    layout: false
 page '/*.xml',    layout: false
-page '/404.html', layout: false
+page '/404.html', directory_index: false
 
 set :css_dir,    'assets/stylesheets'
 set :fonts_dir,  'assets/fonts'
