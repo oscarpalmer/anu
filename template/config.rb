@@ -1,6 +1,6 @@
 activate :external_pipeline,
   name: :gulp,
-  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build --production' : 'watch'}"
+  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build --production' : 'watch'}",
   source: '.tmp/gulp',
   latency: 1
 
