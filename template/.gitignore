@@ -1,4 +1,6 @@
 .bundle
 .DS_Store
+.tmp/
 build/
 Gemfile.lock
+package-lock.json
