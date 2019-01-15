@@ -8,15 +8,17 @@ configure :build do
   activate :minify_javascript
 end
 
+ignore '/**/.keep'
+
 page '/*.json',   layout: false
 page '/*.txt',    layout: false
 page '/*.xml',    layout: false
 page '/404.html', layout: false
 
-set :css_dir,    'assets/css'
+set :css_dir,    'assets/stylesheets'
 set :fonts_dir,  'assets/fonts'
-set :images_dir, 'assets/img'
-set :js_dir,     'assets/js'
+set :images_dir, 'assets/images'
+set :js_dir,     'assets/javascripts'
 
 set :markdown,
   autolink: true,
