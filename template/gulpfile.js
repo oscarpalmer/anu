@@ -60,5 +60,5 @@ const watch = (cb) => {
 };
 
 // Export the tasks for access in the CLI
-exports.build = gulp.series(clean, gulp.parallel(css, js), clean);
+exports.build = gulp.series(clean, gulp.parallel(css, js));
 exports.watch = gulp.series(clean, watch);
