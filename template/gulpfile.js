@@ -4,6 +4,7 @@ const del = require('del');
 const gulp = require('gulp');
 const gulp_gzip = require('gulp-gzip');
 const gulp_if = require('gulp-if');
+const gulp_purgecss = require('gulp-purgecss');
 const gulp_sass = require('gulp-sass');
 const gulp_report = require('gulp-sizereport');
 const gulp_uglify = require('gulp-uglify');
@@ -84,6 +85,20 @@ const js = () => {
 };
 
 // Gulp task
+// Purges CSS files; removes unused selectors and rules
+const purge = () => {
+  console.log('== Purging CSS files');
+
+  return pump([
+    gulp.src(folders.build + folders.css + '/**/*.css'),
+    gulp_purgecss({
+      content: [folders.build + '/**/*.html']
+    }),
+    gulp.dest(folders.build + folders.css)
+  ]);
+};
+
+// Gulp task
 // Displays normal and compressed file sizes
 const report = () => {
   console.log('== Creating size report for files');
@@ -108,6 +123,6 @@ const watch = (cb) => {
 };
 
 // Export the tasks for access in the CLI
-exports.after = gulp.series(gzip, report);
+exports.after = gulp.series(purge, gzip, report);
 exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, js));
 exports.watch = gulp.series(clean_tmp, watch);
