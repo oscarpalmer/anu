@@ -2,6 +2,8 @@
 // Include all required modules
 const del = require('del');
 const gulp = require('gulp');
+const gulp_babel = require('gulp-babel');
+const gulp_eslint = require('gulp-eslint');
 const gulp_gzip = require('gulp-gzip');
 const gulp_if = require('gulp-if');
 const gulp_purgecss = require('gulp-purgecss');
@@ -74,10 +76,13 @@ const gzip = () => {
 };
 
 // Gulp task
-// Minifies JavaScript-files
+// Babels and minifies JavaScript-files
 const js = () => {
   return pump([
     gulp.src(config.js.source),
+    gulp_babel({
+      presets: ['@babel/env']
+    }),
     // Minify if called during build
     gulp_if(yargs.production === true, gulp_uglify()),
     gulp.dest(config.js.destination)
