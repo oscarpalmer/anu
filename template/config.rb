@@ -28,7 +28,7 @@ end
 # Ignore .keep-files; prevents empty folders in builds
 ignore '/**/.keep'
 # Ignore Sass-files; Gulp handles the pre-processing
-ignore '/**/*.scss'
+ignore '/**/*.{sass,scss}'
 
 # Ignore layouts for data-files
 page '/*.json',   layout: false

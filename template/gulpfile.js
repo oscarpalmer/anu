@@ -4,7 +4,6 @@ const del = require('del');
 const gulp = require('gulp');
 const gulp_gzip = require('gulp-gzip');
 const gulp_if = require('gulp-if');
-const gulp_minify = require('gulp-clean-css');
 const gulp_sass = require('gulp-sass');
 const gulp_report = require('gulp-sizereport');
 const gulp_uglify = require('gulp-uglify');
@@ -24,7 +23,7 @@ const folders = {
 const config = {
   css: {
     destination: folders.tmp + folders.css,
-         source: folders.source + folders.css + '/**/*.{css,scss}'
+         source: folders.source + folders.css + '/**/*.{css,sass,scss}'
   },
   js: {
     destination: folders.tmp + folders.js,
@@ -50,9 +49,10 @@ const clean_tmp = () => del(['./.tmp/**/*.{css,js}']);
 const css = () => {
   return pump([
     gulp.src(config.css.source),
-    gulp_sass().on('error', gulp_sass.logError),
-    // Minify if called during build
-    gulp_if(yargs.production === true, gulp_minify()),
+    gulp_sass({
+      // Compress (minify) if called during build
+      outputStyle: yargs.production === true ? 'compressed' : 'nested'
+    }).on('error', gulp_sass.logError),
     gulp.dest(config.css.destination)
   ]);
 };
@@ -61,6 +61,7 @@ const css = () => {
 // Compresses text files
 const gzip = () => {
   console.log('== Compressing text files with gzip');
+
   return pump([
     gulp.src(folders.build + '/**/*.{css,html,js}'),
     gulp_gzip({
@@ -86,6 +87,7 @@ const js = () => {
 // Displays normal and compressed file sizes
 const report = () => {
   console.log('== Creating size report for files');
+
   return pump([
     gulp.src(folders.build + '/**/*.{css,html,js}'),
     gulp_report({
