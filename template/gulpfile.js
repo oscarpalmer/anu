@@ -2,22 +2,33 @@
 // Include all required modules
 const del = require('del');
 const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const minify = require('gulp-clean-css');
-const sass = require('gulp-sass');
-const uglify = require('gulp-uglify');
+const gulp_gzip = require('gulp-gzip');
+const gulp_if = require('gulp-if');
+const gulp_minify = require('gulp-clean-css');
+const gulp_sass = require('gulp-sass');
+const gulp_report = require('gulp-sizereport');
+const gulp_uglify = require('gulp-uglify');
 const pump = require('pump');
 const yargs = require('yargs').argv;
+
+// Folders to search in and build to
+const folders = {
+   build: './build',
+     css: '/assets/stylesheets',
+      js: '/assets/javascripts',
+  source: './source',
+     tmp: './.tmp/gulp'
+}
 
 // Configuration for Gulp
 const config = {
   css: {
-    destination: '.tmp/gulp/assets/stylesheets',
-    source: './source/assets/stylesheets/**/*.{css,sass,scss}'
+    destination: folders.tmp + folders.css,
+         source: folders.source + folders.css + '/**/*.{css,scss}'
   },
   js: {
-    destination: '.tmp/gulp/assets/javascripts',
-    source: './source/assets/javascripts/**/*.js'
+    destination: folders.tmp + folders.js,
+         source: folders.source + folders.js + '/**/*.js'
   },
   watch: {
     // Allow tasks to be triggered on startup,
@@ -26,31 +37,66 @@ const config = {
   }
 };
 
-// Empty the temporary folder
-const clean = () => del(['.tmp/**']);
+// Gulp task
+// Empties and removes the build folder
+const clean_build = () => del([folders.build + '/**']);
 
-// Gulp task for working with CSS and Sass
+// Gulp task
+// Empties the temporary folders
+const clean_tmp = () => del(['./.tmp/**/*.{css,js}']);
+
+// Gulp task
+// Processes and minifies CSS and Sass-files
 const css = () => {
   return pump([
     gulp.src(config.css.source),
-    sass().on('error', sass.logError),
+    gulp_sass().on('error', gulp_sass.logError),
     // Minify if called during build
-    gulpif(yargs.production === true, minify()),
+    gulp_if(yargs.production === true, gulp_minify()),
     gulp.dest(config.css.destination)
   ]);
 };
 
-// Gulp task for working with JS
+// Gulp task
+// Compresses text files
+const gzip = () => {
+  console.log('== Compressing text files with gzip');
+  return pump([
+    gulp.src(folders.build + '/**/*.{css,html,js}'),
+    gulp_gzip({
+      // Skip compression if it would end up larger than its source
+      skipGrowingFiles : true
+    }),
+    gulp.dest(folders.build)
+  ]);
+};
+
+// Gulp task
+// Minifies JavaScript-files
 const js = () => {
   return pump([
     gulp.src(config.js.source),
     // Minify if called during build
-    gulpif(yargs.production === true, uglify()),
+    gulp_if(yargs.production === true, gulp_uglify()),
     gulp.dest(config.js.destination)
   ]);
 };
 
-// Gulp task for watching files during development
+// Gulp task
+// Displays normal and compressed file sizes
+const report = () => {
+  console.log('== Creating size report for files');
+  return pump([
+    gulp.src(folders.build + '/**/*.{css,html,js}'),
+    gulp_report({
+      // Display gzip-column
+      gzip: true
+    })
+  ]);
+}
+
+// Gulp task
+// Watches files during development
 const watch = (cb) => {
   gulp.watch(config.css.source, config.watch, css);
   gulp.watch(config.js.source, config.watch, js);
@@ -60,5 +106,6 @@ const watch = (cb) => {
 };
 
 // Export the tasks for access in the CLI
-exports.build = gulp.series(clean, gulp.parallel(css, js));
-exports.watch = gulp.series(clean, watch);
+exports.after = gulp.series(gzip, report);
+exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, js));
+exports.watch = gulp.series(clean_tmp, watch);

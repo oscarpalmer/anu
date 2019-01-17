@@ -2,7 +2,7 @@
 # External pipeline for Middleman
 activate :external_pipeline,
   name: :gulp,
-  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build --production' : 'watch'}",
+  command: "./node_modules/gulp/bin/gulp.js #{build? ? 'build --production' : 'watch'} --silent",
   source: '.tmp/gulp',
   latency: 1
 
@@ -15,16 +15,20 @@ configure :build do
   activate :asset_hash
   # Directory indexes for pages (prettier urls); e.g. about.html -> about/index.html
   activate :directory_indexes
-  # Compress all files
-  activate :gzip
   # Minify HTML
   activate :minify_html
+
+  # What to do after building
+  after_build do |builder|
+    # Run Gulp-task for compressing files and reporting their sizes
+    builder.thor.run './node_modules/gulp/bin/gulp.js after --silent'
+  end
 end
 
 # Ignore .keep-files; prevents empty folders in builds
 ignore '/**/.keep'
 # Ignore Sass-files; Gulp handles the pre-processing
-ignore '/**/*.{sass,scss}'
+ignore '/**/*.scss'
 
 # Ignore layouts for data-files
 page '/*.json',   layout: false
