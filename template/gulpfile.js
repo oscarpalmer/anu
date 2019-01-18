@@ -1,9 +1,10 @@
 
-// Include all required modules
+/**
+ * Include all required modules
+ */
 const del = require('del');
 const gulp = require('gulp');
 const gulp_babel = require('gulp-babel');
-const gulp_eslint = require('gulp-eslint');
 const gulp_gzip = require('gulp-gzip');
 const gulp_if = require('gulp-if');
 const gulp_purgecss = require('gulp-purgecss');
@@ -13,7 +14,9 @@ const gulp_uglify = require('gulp-uglify');
 const pump = require('pump');
 const yargs = require('yargs').argv;
 
-// Folders to search in and build to
+/**
+ * Folders to search in and build to
+ */
 const folders = {
    build: './build',
      css: '/assets/stylesheets',
@@ -22,7 +25,9 @@ const folders = {
      tmp: './.tmp/gulp'
 }
 
-// Configuration for Gulp
+/**
+ * Configuration for Gulp
+ */
 const config = {
   css: {
     destination: folders.tmp + folders.css,
@@ -39,16 +44,22 @@ const config = {
   }
 };
 
-// Gulp task
-// Empties and removes the build folder
+/**
+ * Gulp task
+ * Empties and removes the build folder
+ */
 const clean_build = () => del([folders.build + '/**']);
 
-// Gulp task
-// Empties the temporary folders
+/**
+ * Gulp task
+ * Empties the temporary folders
+ */
 const clean_tmp = () => del(['./.tmp/**/*.{css,js}']);
 
-// Gulp task
-// Processes and minifies CSS and Sass-files
+/**
+ * Gulp task
+ * Processes and minifies CSS and Sass-files
+ */
 const css = () => {
   return pump([
     gulp.src(config.css.source),
@@ -60,8 +71,10 @@ const css = () => {
   ]);
 };
 
-// Gulp task
-// Compresses text files
+/**
+ * Gulp task
+ * Compresses text files
+ */
 const gzip = () => {
   console.log('== Compressing text files with gzip');
 
@@ -75,8 +88,10 @@ const gzip = () => {
   ]);
 };
 
-// Gulp task
-// Babels and minifies JavaScript-files
+/**
+ * Gulp task
+ * Babels and minifies JavaScript-files
+ */
 const js = () => {
   return pump([
     gulp.src(config.js.source),
@@ -89,8 +104,10 @@ const js = () => {
   ]);
 };
 
-// Gulp task
-// Purges CSS files; removes unused selectors and rules
+/**
+ * Gulp task
+ * Purges CSS files; removes unused selectors and rules
+ */
 const purge = () => {
   console.log('== Purging CSS files');
 
@@ -103,8 +120,10 @@ const purge = () => {
   ]);
 };
 
-// Gulp task
-// Displays normal and compressed file sizes
+/**
+ * Gulp task
+ * Displays normal and compressed file sizes
+ */
 const report = () => {
   console.log('== Creating size report for files');
 
@@ -117,8 +136,10 @@ const report = () => {
   ]);
 }
 
-// Gulp task
-// Watches files during development
+/**
+ * Gulp task
+ * Watches files during development
+ */
 const watch = (cb) => {
   gulp.watch(config.css.source, config.watch, css);
   gulp.watch(config.js.source, config.watch, js);
@@ -127,7 +148,9 @@ const watch = (cb) => {
   cb();
 };
 
-// Export the tasks for access in the CLI
+/**
+ * Export the tasks for access in the CLI
+ */
 exports.after = gulp.series(purge, gzip, report);
 exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, js));
 exports.watch = gulp.series(clean_tmp, watch);

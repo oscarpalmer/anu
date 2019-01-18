@@ -34,6 +34,7 @@ ignore '/**/*.{sass,scss}'
 page '/*.json',   layout: false
 page '/*.txt',    layout: false
 page '/*.xml',    layout: false
+
 # Ignore a directory index for the error page
 page '/404.html', directory_index: false
 
