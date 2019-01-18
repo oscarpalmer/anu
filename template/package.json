@@ -10,6 +10,7 @@
     "gulp-babel": "^8.0.x",
     "gulp-gzip": "^1.4.x",
     "gulp-if": "^2.0.x",
+    "gulp-imagemin": "^5.0.x",
     "gulp-purgecss": "^1.1.x",
     "gulp-sass": "^4.0.x",
     "gulp-sizereport": "^1.2.x",

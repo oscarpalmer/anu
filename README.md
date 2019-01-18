@@ -12,11 +12,11 @@ So yes, it's a name taken from one of the _creators_ in a creation myth, which I
 
 - [x] 🛠 &nbsp;&nbsp;Repo created
 - [x] 🤓 &nbsp;&nbsp;A way-too-long explanation for the name
-- [ ] :books:&nbsp;&nbsp;An actual template
+- [x] :books:&nbsp;&nbsp;An actual template
   - [x] :green_book:&nbsp;&nbsp;Basic structure
   - [x] :closed_book:&nbsp;&nbsp;Error document and sitemap
   - [x] :blue_book:&nbsp;&nbsp;External pipeline
-  - [ ] :orange_book:&nbsp;&nbsp;QoL-additions&nbsp;&nbsp;🤔
+  - [x] :orange_book:&nbsp;&nbsp;QoL-additions
 - [ ] :pencil:&nbsp;&nbsp;Details of what's included
 - [ ] :book:&nbsp;&nbsp;Step-by-step instructions
 

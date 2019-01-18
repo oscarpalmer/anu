@@ -7,6 +7,7 @@ const gulp = require('gulp');
 const gulp_babel = require('gulp-babel');
 const gulp_gzip = require('gulp-gzip');
 const gulp_if = require('gulp-if');
+const gulp_imagemin = require('gulp-imagemin');
 const gulp_purgecss = require('gulp-purgecss');
 const gulp_sass = require('gulp-sass');
 const gulp_report = require('gulp-sizereport');
@@ -26,6 +27,7 @@ const anu = yaml.safeLoad(fs.readFileSync('.anu.yml', 'utf8'));
 const folders = {
    build: './build',
      css: anu.folders.stylesheets,
+     img: anu.folders.images,
       js: anu.folders.javascripts,
   source: './source',
      tmp: './.tmp/gulp'
@@ -38,6 +40,10 @@ const config = {
   css: {
     destination: folders.tmp + folders.css,
          source: folders.source + folders.css + '/**/*.{css,sass,scss}'
+  },
+  img: {
+    destination: folders.tmp + folders.img,
+         source: folders.source + folders.img + '/**/*.{gif,jpeg,jpg,png,svg}'
   },
   js: {
     destination: folders.tmp + folders.js,
@@ -96,7 +102,19 @@ const gzip = () => {
 
 /**
  * Gulp task
- * Babels and minifies JavaScript-files
+ * Compresses image files
+ */
+const images = () => {
+  return pump([
+    gulp.src(config.img.source),
+    gulp_if(yargs.production === true, gulp_imagemin()),
+    gulp.dest(config.img.destination)
+  ]);
+};
+
+/**
+ * Gulp task
+ * Babels and minifies JavaScript files
  */
 const js = () => {
   return pump([
@@ -134,7 +152,7 @@ const report = () => {
   console.log('== Creating size report for files');
 
   return pump([
-    gulp.src(folders.build + '/**/*.{css,html,js}'),
+    gulp.src(folders.build + '/**/*.{css,gif,html,jpg,jpeg,js,png,svg}'),
     gulp_report({
       // Display gzip-column
       gzip: true
@@ -148,6 +166,7 @@ const report = () => {
  */
 const watch = (cb) => {
   gulp.watch(config.css.source, config.watch, css);
+  gulp.watch(config.img.source, config.watch, images);
   gulp.watch(config.js.source, config.watch, js);
 
   // Gulp-callback for async goodness
@@ -158,5 +177,5 @@ const watch = (cb) => {
  * Export the tasks for access in the CLI
  */
 exports.after = gulp.series(purge, gzip, report);
-exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, js));
+exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, images, js));
 exports.watch = gulp.series(clean_tmp, watch);
