@@ -8,8 +8,7 @@ xml.urlset xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' do
   pages.each do |page|
     xml.url do
       # Include the url for each selected page
-      # TODO: configuration for base url
-      xml.loc "https://example.com#{page.url}"
+      xml.loc "#{config[:anu]['url']}#{page.url}"
     end
   end
 end

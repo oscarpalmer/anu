@@ -1,8 +1,8 @@
-
 /**
  * Include all required modules
  */
 const del = require('del');
+const fs = require('fs');
 const gulp = require('gulp');
 const gulp_babel = require('gulp-babel');
 const gulp_gzip = require('gulp-gzip');
@@ -12,15 +12,21 @@ const gulp_sass = require('gulp-sass');
 const gulp_report = require('gulp-sizereport');
 const gulp_uglify = require('gulp-uglify');
 const pump = require('pump');
+const yaml = require('js-yaml');
 const yargs = require('yargs').argv;
+
+/**
+ * Read Anu-configuration
+ */
+const anu = yaml.safeLoad(fs.readFileSync('.anu.yml', 'utf8'));
 
 /**
  * Folders to search in and build to
  */
 const folders = {
    build: './build',
-     css: '/assets/stylesheets',
-      js: '/assets/javascripts',
+     css: anu.folders.stylesheets,
+      js: anu.folders.javascripts,
   source: './source',
      tmp: './.tmp/gulp'
 }

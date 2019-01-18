@@ -14,6 +14,7 @@
     "gulp-sass": "^4.0.x",
     "gulp-sizereport": "^1.2.x",
     "gulp-uglify": "^3.0.x",
+    "js-yaml": "^3.12.x",
     "pump": "^3.0.x",
     "yargs": "^12.0.x"
   }

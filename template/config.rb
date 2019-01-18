@@ -1,4 +1,10 @@
 
+# Include useful Ruby libraries
+require 'yaml'
+
+# Read Anu-configuration and make it accessible within Middleman
+config[:anu] = YAML.load_file '.anu.yml'
+
 # External pipeline for Middleman
 activate :external_pipeline,
   name: :gulp,
@@ -39,10 +45,10 @@ page '/*.xml',    layout: false
 page '/404.html', directory_index: false
 
 # Where Middleman will look for assets
-set :css_dir,    'assets/stylesheets'
-set :fonts_dir,  'assets/fonts'
-set :images_dir, 'assets/images'
-set :js_dir,     'assets/javascripts'
+set :css_dir,    config[:anu]['folders']['stylesheets']
+set :fonts_dir,  config[:anu]['folders']['fonts']
+set :images_dir, config[:anu]['folders']['images']
+set :js_dir,     config[:anu]['folders']['javascripts']
 
 # Tell the Markdown-parser to allow more functionality
 set :markdown,
