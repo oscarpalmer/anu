@@ -66,7 +66,7 @@ const clean_build = () => del([folders.build + '/**']);
  * Gulp task
  * Empties the temporary folders
  */
-const clean_tmp = () => del(['./.tmp/**/*.{css,js}']);
+const clean_tmp = () => del(['./.tmp/**/*.{css,gif,jpeg,jpg,js,png,svg}']);
 
 /**
  * Gulp task
@@ -88,10 +88,10 @@ const css = () => {
  * Compresses text files
  */
 const gzip = () => {
-  console.log('== Compressing text files with gzip');
+  console.log('== Compressing text files');
 
   return pump([
-    gulp.src(folders.build + '/**/*.{css,html,js}'),
+    gulp.src(folders.build + '/**/*.{css,html,js,svg}'),
     gulp_gzip({
       // Skip compression if it would end up larger than its source
       skipGrowingFiles : true
@@ -149,10 +149,10 @@ const purge = () => {
  * Displays normal and compressed file sizes
  */
 const report = () => {
-  console.log('== Creating size report for files');
+  console.log('== Creating size report');
 
   return pump([
-    gulp.src(folders.build + '/**/*.{css,gif,html,jpg,jpeg,js,png,svg}'),
+    gulp.src(folders.build + '/**/*.{css,html,js,svg}'),
     gulp_report({
       // Display gzip-column
       gzip: true
@@ -167,7 +167,7 @@ const report = () => {
 const watch = (cb) => {
   gulp.watch(config.css.source, config.watch, css);
   gulp.watch(config.img.source, config.watch, images);
-  gulp.watch(config.js.source, config.watch, js);
+  gulp.watch(config.js.source,  config.watch, js);
 
   // Gulp-callback for async goodness
   cb();
@@ -177,5 +177,7 @@ const watch = (cb) => {
  * Export the tasks for access in the CLI
  */
 exports.after = gulp.series(purge, gzip, report);
-exports.build = gulp.series(gulp.parallel(clean_tmp, clean_build), gulp.parallel(css, images, js));
+exports.build = gulp.series(
+  gulp.parallel(clean_tmp, clean_build),
+  gulp.parallel(css, images, js));
 exports.watch = gulp.series(clean_tmp, watch);

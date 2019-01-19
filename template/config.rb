@@ -5,6 +5,9 @@ require 'yaml'
 # Read Anu-configuration and make it accessible within Middleman
 config[:anu] = YAML.load_file '.anu.yml'
 
+# Directory indexes for pages (prettier urls); e.g. about.html -> about/index.html
+activate :directory_indexes
+
 # External pipeline for Middleman
 activate :external_pipeline,
   name: :gulp,
@@ -19,8 +22,6 @@ activate :livereload
 configure :build do
   # Suffixed hashes for assets; useful for caching
   activate :asset_hash
-  # Directory indexes for pages (prettier urls); e.g. about.html -> about/index.html
-  activate :directory_indexes
   # Minify HTML
   activate :minify_html
 
