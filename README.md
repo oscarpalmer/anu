@@ -31,11 +31,21 @@ So yes, it's a name taken from one of the _creators_ in a creation myth, which I
 
 ## How to get started
 
-…
+_Anu_ is built on top _Middleman_ and _Gulp_, which in turn means it is built on top of _Ruby_ and _Node(.js)_, two popular programming languages and enviroments, so first we need to check if they exist on our system, by running these commands in a _command line interface_.
+
+```banishing
+# Check if any Ruby version exists
+ruby -v
+
+# Check if any Node version exists
+node -v
+```
+
+If they are both installed – as in, not giving you a sad error message – then you can safely hop along to [the installation section](#installation). If you did get an error message, you should check out [the prerequisites](#prerequisites) for using _Middleman_ and _Anu_. :blush:
 
 ### Prerequisites
 
-Because both [Ruby](https://www.ruby-lang.org/en/) and [Node(.js)](https://nodejs.org/en/) are fairly large programming environments, it might be a good idea to consider using a package manager for them, as well as for many other development libraries and helpers. Regardless of your operating system of choice, I would like to recommend [Homebrew](https://brew.sh), which is available for _macOS_ as-is, and for _Linux_ and _Windows_ with [Linuxbrew](https://docs.brew.sh/Linuxbrew).
+Because both [Ruby](https://www.ruby-lang.org/en/) and [Node](https://nodejs.org/en/) are fairly large programming environments, it might be a good idea to consider using a package manager for them, as well as for many other development libraries and helpers. Regardless of your operating system of choice, I would like to recommend [Homebrew](https://brew.sh), which is available for _macOS_ as-is, and for _Linux_ and _Windows_ with [Linuxbrew](https://docs.brew.sh/Linuxbrew).
 
 Following the guides on _Homebrew's_ website for either version should lead to it being installed on your system – yay! :beer:
 
