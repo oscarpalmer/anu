@@ -2,6 +2,8 @@
 
 A modern &ndash; and somewhat opinionated &ndash; [Middleman](https://middlemanapp.com) template, with an external pipeline handled by [Gulp](https://gulpjs.com). :v:
 
+---
+
 ## Table of Contents
 
 - [The name](#the-name)
@@ -18,6 +20,8 @@ A modern &ndash; and somewhat opinionated &ndash; [Middleman](https://middlemana
   - [Gulp & JavaScript](#gulp--javascript)
 - [To-do](#to-do)
 - [License](#license)
+
+---
 
 ## The name
 
