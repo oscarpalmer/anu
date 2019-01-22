@@ -1,6 +1,6 @@
 # Anu
 
-A modern &ndash; and somewhat opinionated &ndash; [Middleman](https://middlemanapp.com) template, with an external pipeline handled by [Gulp](https://gulpjs.com). :v:
+A modern &ndash; and somewhat opinionated &ndash; [_Middleman_](https://middlemanapp.com) template, with an external pipeline handled by [_Gulp_](https://gulpjs.com). :v:
 
 ---
 
@@ -45,7 +45,7 @@ If they are both installed – as in, not giving you a sad error message – the
 
 ### Prerequisites
 
-Because both [Ruby](https://www.ruby-lang.org/en/) and [Node](https://nodejs.org/en/) are fairly large programming environments, it might be a good idea to consider using a package manager for them, as well as for many other development libraries and helpers. Regardless of your operating system of choice, I would like to recommend [Homebrew](https://brew.sh), which is available for _macOS_ as-is, and for _Linux_ and _Windows_ with [Linuxbrew](https://docs.brew.sh/Linuxbrew).
+Because both [_Ruby_](https://www.ruby-lang.org/en/) and [_Node_](https://nodejs.org/en/) are fairly large programming environments, it might be a good idea to consider using a package manager for them, as well as for many other development libraries and helpers. Regardless of your operating system of choice, I would like to recommend [_Homebrew_](https://brew.sh), which is available for _macOS_ as-is, and for _Linux_ and _Windows_ with [_Linuxbrew_](https://docs.brew.sh/Linuxbrew).
 
 Following the guides on _Homebrew's_ website for either version should lead to it being installed on your system – yay! :beer:
 
@@ -57,15 +57,15 @@ To install these two utilities – and later _Ruby_ itself – we can happily fo
 
 ##### Ruby version?
 
-_Anu_ is currently set up to work with version `2.4.3` of Ruby, which isn't the newest one, but the latest one that is pre-installed on [Netlify](https://www.netlify.com), where I like to host many of my Middleman projects. If you need or want another version, that's totally possible, just remember to edit the contents of the [`.ruby-version` file](template/.ruby-version) to maintain order in your project.
+_Anu_ is currently set up to work with version `2.4.3` of _Ruby_, which isn't the newest one, but the latest one that is pre-installed on [_Netlify_](https://www.netlify.com), where I like to host many of my _Middleman_ projects. If you need or want another version, that's totally possible, just remember to edit the contents of the [`.ruby-version` file](template/.ruby-version) to maintain order in your project.
 
 #### Node
 
-Just like with Ruby, it's a good idea to use a version manager to handle projects and their contexts differently; Node's manager is called [`nvm`](https://github.com/creationix/nvm), and will let us manage all different versions with ease. [`nvm's` guide](https://github.com/creationix/nvm#installation) is a bit more technical, but shouldn't be a problem for you. :blush:
+Just like with _Ruby_, it's a good idea to use a version manager to handle projects and their contexts differently; _Node's_ manager is called [`nvm`](https://github.com/creationix/nvm), and will let us manage all different versions with ease. [`nvm's` guide](https://github.com/creationix/nvm#installation) is a bit more technical, but shouldn't be a problem for you. :blush:
 
 ##### Node version?
 
-Unlike with Ruby, _Anu_ does not have any &ldquo;strong&rdquo; opinions on what version of _Node_ you use, but I can personally recommend using the latest and most stable version, which should be the default option with _nvm_.
+Unlike with _Ruby_, _Anu_ does not have any &ldquo;strong&rdquo; opinions on what version of _Node_ you use, but I can personally recommend using the latest and most stable version, which should be the default option with _nvm_.
 
 ### Installation
 
@@ -101,26 +101,26 @@ The gems and packages listed below are only _Anu_'s direct dependencies, but alm
 
 - [Middleman](https://middlemanapp.com); my favourite static site generator
   - [LiveReload](https://rubygems.org/gems/middleman-livereload); live reloading of assets
-  - [Minify HTML](https://rubygems.org/gems/middleman-minify-html); minifies HTML during build
+  - [Minify HTML](https://rubygems.org/gems/middleman-minify-html); minifies _HTML_ during build
 - [Builder](https://rubygems.org/gems/builder); helpful for creating data files _(e.g. XML)_ on the fly
-- [Redcarpet](https://rubygems.org/gems/redcarpet); an extensible Markdown parser
+- [Redcarpet](https://rubygems.org/gems/redcarpet); an extensible _Markdown_ parser
 
 ### Gulp & JavaScript
 
 - [Gulp](https://gulpjs.com); my preferred build toolkit
-  - [Babel](https://www.npmjs.com/package/gulp-babel); Babel integration for Gulp
+  - [Babel](https://www.npmjs.com/package/gulp-babel); _Babel_ integration for _Gulp_
   - [Gzip](https://www.npmjs.com/package/gulp-gzip); compresses text files
   - [If](https://www.npmjs.com/package/gulp-if); allows for conditionals within tasks
   - [ImageMin](https://www.npmjs.com/package/gulp-imagemin); compresses images
-  - [PurgeCSS](https://www.npmjs.com/package/gulp-purgecss); searches through both HTML and CSS to remove unused selectors
-  - [SASS](https://www.npmjs.com/package/gulp-sass); my preferred CSS preprocessor
+  - [PurgeCSS](https://www.npmjs.com/package/gulp-purgecss); searches through both _HTML_ and _CSS_ to remove unused selectors
+  - [SASS](https://www.npmjs.com/package/gulp-sass); my preferred _CSS_ preprocessor
   - [Size Report](https://www.npmjs.com/package/gulp-sizereport); displays normal and gzipped file sizes
-  - [Uglify](https://www.npmjs.com/package/gulp-uglify); minifies javascript
-- [Babel](https://babeljs.io); my preferred JavaScript compiler
+  - [Uglify](https://www.npmjs.com/package/gulp-uglify); minifies _JavaScript_
+- [Babel](https://babeljs.io); my preferred _JavaScript_ compiler
 - [Del](https://www.npmjs.com/package/del); delete files and folders with ease
-- [JS-YAML](https://www.npmjs.com/package/js-yaml); transform YAML-content to JSON
-- [Pump](https://www.npmjs.com/package/pump); helps with streaming of files, which Gulp does
-- [Yargs](https://www.npmjs.com/package/yargs); parses CLI arguments
+- [JS-YAML](https://www.npmjs.com/package/js-yaml); transform _YAML_ to _JSON_
+- [Pump](https://www.npmjs.com/package/pump); helps with streaming of files, which _Gulp_ does
+- [Yargs](https://www.npmjs.com/package/yargs); parses _CLI_ arguments
 
 ## To-do
 
